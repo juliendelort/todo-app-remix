@@ -42,7 +42,11 @@ export const meta = () => ({
 });
 
 export const loader = async () => {
-  return json(await getCounts());
+  try {
+    return json(await getCounts());
+  } catch (error) {
+    return json({ error: { message: 'Failed loading data!' } });
+  }
 };
 
 export const action = async ({ request }) => {

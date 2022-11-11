@@ -6,6 +6,8 @@ Demo: https://todo-app-remix.vercel.app/
 
 Created with [Remix](https://remix.run/).
 
+This uses [jsonbin.io](https://jsonbin.io/) for data storage. Operations may be slow.
+
 ## Running the project
 
 Clone the repo then:

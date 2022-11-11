@@ -5,11 +5,14 @@ import { useLoaderData } from "@remix-run/react";
 import { TasksList } from '~/components/TasksList';
 
 export const loader = async () => {
-    return json(await getCompletedTasks());
+    try {
+        return json({ tasks: await getCompletedTasks() });
+    } catch (error) {
+        return json({ error: { message: 'Failed loading data!' } });
+    }
 };
 
 export default function Completed() {
-    const tasks = useLoaderData();
+    return <TasksList />;
 
-    return <TasksList tasks={tasks} />;
 };

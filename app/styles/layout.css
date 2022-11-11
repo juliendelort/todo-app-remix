@@ -74,12 +74,17 @@
     opacity: 0.5;
 }
 
-.layout .loader {
+.layout .loader,
+.layout .error {
     background: white;
     font-size: smaller;
     padding: 10px;
     text-align: center;
     color: darkgray;
+}
+
+.layout .error {
+    color: red;
 }
 
 .layout .add_todo_input:focus-within {
@@ -144,6 +149,7 @@
 .layout .mobile-links {
     display: none;
 }
+
 
 @media screen and (max-width: 768px) {
     .layout .links {

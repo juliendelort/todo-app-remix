@@ -74,8 +74,8 @@ async function writeData(tasks) {
     const result = await fetch('https://api.jsonbin.io/v3/b/636eccf82b3499323bfd19a5', {
         method: 'PUT',
         headers: {
-            'X-Master-Key': '$2b$10$0VffX9c9dU7k.P3dlAkv.u8HCRjw3LVxl/KALXhHqUaZlMCk52Lvq',
-            'X-Access-Key': '$2b$10$vG6bM/uF3yx7OzDK2b8v0.XJgdr0V9pmyrLVd6DR0Z5ol8FX8AqGa',
+            'X-Master-Key': process.env.MASTER_KEY,
+            'X-Access-Key': process.env.ACCESS_KEY,
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({ tasks })
