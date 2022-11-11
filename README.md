@@ -1,4 +1,19 @@
-# Welcome to Remix!
+# Todo App
+
+Solution to frontend mentor challenge: https://www.frontendmentor.io/challenges/todo-app-Su1_KokOW
+
+Demo: https://todo-app-remix.vercel.app/
+
+Created with [Remix](https://remix.run/).
+
+## Running the project
+
+Clone the repo then:
+```
+npm install && npm run dev
+```
+
+## Remix Readme
 
 - [Remix Docs](https://remix.run/docs)
 

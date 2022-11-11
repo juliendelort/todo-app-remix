@@ -1,6 +1,6 @@
 
 const fs = require('fs');
-
+const path = require('path');
 
 export async function getAllTasks() {
     return readData();
@@ -58,7 +58,7 @@ export async function clearCompleted() {
 
 async function readData() {
     return new Promise((resolve, reject) => {
-        fs.readFile('data/tasks.json', (err, data) => {
+        fs.readFile(getPath(), (err, data) => {
             if (err) {
                 reject(err);
             } else {
@@ -70,7 +70,7 @@ async function readData() {
 
 async function writeData(tasks) {
     return new Promise((resolve, reject) => {
-        fs.writeFile('data/tasks.json', JSON.stringify(tasks), (err) => {
+        fs.writeFile(getPath(), JSON.stringify(tasks), (err) => {
             if (err) {
                 reject(err);
             } else {
@@ -78,4 +78,10 @@ async function writeData(tasks) {
             }
         });
     });
+}
+
+function getPath() {
+    const jsonDirectory = path.join(process.cwd(), 'data');
+
+    return jsonDirectory + '/tasks.json';
 }
