@@ -74,6 +74,14 @@
     opacity: 0.5;
 }
 
+.layout .loader {
+    background: white;
+    font-size: smaller;
+    padding: 10px;
+    text-align: center;
+    color: darkgray;
+}
+
 .layout .add_todo_input:focus-within {
     outline: 2px solid var(--bright-blue);
 }

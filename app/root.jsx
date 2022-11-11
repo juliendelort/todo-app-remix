@@ -128,7 +128,7 @@ export default function App() {
               </fetcher.Form>
             </div>
             <div className="tasks-container">
-              {transition.type === 'normalLoad' ? 'Loading...' : <Outlet />}
+              {transition.type === 'normalLoad' ? <div className="loader">Loading...</div> : <Outlet />}
               <div className="bottom-bar">
                 <div>{countActive} items left</div>
                 <div className="links">
