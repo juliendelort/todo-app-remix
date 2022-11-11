@@ -1,0 +1,52 @@
+.task-item {
+    background-color: var(--task-bg);
+    height: 50px;
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+    gap: 20px;
+    overflow: hidden;
+    border-bottom: 1px solid var(--border-color);
+    color: var(--task-txt-color);
+    position: relative;
+}
+
+.task-item input[type='checkbox'] {
+    width: 20px;
+    height: 20px;
+    border: 1px solid var(--border-color);
+    border-radius: 50%;
+    appearance: none;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.task-item input[type='checkbox']:checked {
+    background: linear-gradient(hsl(192, 100%, 67%), hsl(280, 87%, 65%));
+}
+
+.task-item input[type='checkbox']:checked:after {
+    content: ' ';
+    background-image: url(~/images/icon-check.svg);
+    position: absolute;
+    z-index: 1;
+    left: 5px;
+    top: 5px;
+    right: 5px;
+    bottom: 5px;
+    background-size: cover;
+    cursor: pointer;
+}
+
+.task-item .task-text.completed {
+    text-decoration: line-through;
+    color: var(--completed-color);
+}
+
+.task-item.pending {
+    opacity: 0.5;
+    pointer-events: none;
+    /* Prevent checking/unchecking while pending */
+}
