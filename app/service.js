@@ -18,9 +18,10 @@ export async function getActiveTasks() {
 }
 
 export async function getCounts() {
-    const countAll = (await getAllTasks()).length;
-    const countCompleted = (await getCompletedTasks()).length;
-    const countActive = (await getActiveTasks()).length;
+    const tasks = await readData();
+    const countAll = tasks.length;
+    const countCompleted = tasks.filter(t => t.completed).length;
+    const countActive = tasks.filter(t => !t.completed).length;
 
     return {
         countAll,
@@ -41,7 +42,7 @@ export async function setCompleted(id, completed) {
 export async function addTask(text) {
     const tasks = await readData();
     const newTask = {
-        id: Math.max(...tasks.map(t => t.id)) + 1,
+        id: tasks.length ? Math.max(...tasks.map(t => t.id)) + 1 : 1,
         text,
         completed: false
     };
@@ -57,31 +58,29 @@ export async function clearCompleted() {
 }
 
 async function readData() {
-    return new Promise((resolve, reject) => {
-        fs.readFile(getPath(), (err, data) => {
-            if (err) {
-                reject(err);
-            } else {
-                resolve(JSON.parse(data));
-            }
-        });
+    const result = await fetch('https://api.jsonbin.io/v3/b/636eccf82b3499323bfd19a5', {
+        method: 'GET',
+        headers: {
+            'X-Master-Key': process.env.MASTER_KEY,
+            'X-Access-Key': process.env.ACCESS_KEY
+        }
     });
+
+    const data = await result.json();
+    return data.record.tasks;
 }
 
 async function writeData(tasks) {
-    return new Promise((resolve, reject) => {
-        fs.writeFile(getPath(), JSON.stringify(tasks), (err) => {
-            if (err) {
-                reject(err);
-            } else {
-                resolve();
-            }
-        });
+    const result = await fetch('https://api.jsonbin.io/v3/b/636eccf82b3499323bfd19a5', {
+        method: 'PUT',
+        headers: {
+            'X-Master-Key': '$2b$10$0VffX9c9dU7k.P3dlAkv.u8HCRjw3LVxl/KALXhHqUaZlMCk52Lvq',
+            'X-Access-Key': '$2b$10$vG6bM/uF3yx7OzDK2b8v0.XJgdr0V9pmyrLVd6DR0Z5ol8FX8AqGa',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ tasks })
     });
-}
 
-function getPath() {
-    const jsonDirectory = path.join(process.cwd(), 'data');
-
-    return jsonDirectory + '/tasks.json';
+    const data = await result.json();
+    return data.record.tasks;
 }
